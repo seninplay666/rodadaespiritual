@@ -24,5 +24,6 @@ Criar uma roda com 2 Sim's e 2 não's alternados inspirado no jogo "Charlie Char
  - Estilize as telas em Tailwind de forma responsiva priorizando o MobileFrist.
  - Retorne sempre as mensagens de erros de forma claras na interface para o usuário (TOAST)
  - sempre trate as mensagens de caixa de mensagens nativas do navegador em um MODAL
- - 
+ - Estética de Horror, assustadora, símbolos considerados amaldiçoados e com cores predominantes preto e vermelho
+    
   
