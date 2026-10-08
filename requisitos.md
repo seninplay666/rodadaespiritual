@@ -1,4 +1,4 @@
-# Roda de Cores
+# Rodada Espiritual
 
 ## Objetivos
 Criar uma roda com 2 Sim's e 2 não's alternados inspirado no jogo "Charlie Charlie"
