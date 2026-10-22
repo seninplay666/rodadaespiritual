@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Creepster&family=MedievalSharp&family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --blood-red: #8b0000;
+    --blood-bright: #dc2626;
+    --blood-glow: rgba(220, 38, 38, 0.45);
+    --dark-void: #060608;
+    --dark-surface: #101014;
+    --dark-card: #16161d;
+    --candle-gold: #f59e0b;
+}
+
+body {
+    background-color: var(--dark-void);
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+.font-horror {
+    font-family: 'Creepster', cursive;
+    letter-spacing: 2px;
+}
+
+.font-ritual {
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+.font-medieval {
+    font-family: 'MedievalSharp', cursive;
+}
+
+/* Brilhos e Sombras Sinistras */
+.glow-red {
+    text-shadow: 0 0 10px rgba(220, 38, 38, 0.8), 0 0 20px rgba(139, 0, 0, 0.6);
+}
+
+.box-glow-red {
+    box-shadow: 0 0 25px rgba(220, 38, 38, 0.35), inset 0 0 15px rgba(139, 0, 0, 0.2);
+}
+
+.box-glow-gold {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+}
+
+/* Fundo com Textura Sombria e Pentagrama Sutil */
+.bg-ritual-pattern {
+    background-color: #060608;
+    background-image: 
+        radial-gradient(circle at 50% 30%, rgba(139, 0, 0, 0.18) 0%, transparent 65%),
+        radial-gradient(circle at 10% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(139, 0, 0, 0.12) 0%, transparent 45%);
+}
+
+/* Efeito de glitch sobrenatural */
+@keyframes ghost-glitch {
+    0% { transform: translate(0) scale(1); filter: drop-shadow(0 0 4px #dc2626); }
+    20% { transform: translate(-2px, 2px) scale(1.01); filter: drop-shadow(2px 0 6px #8b0000); }
+    40% { transform: translate(2px, -1px) scale(0.99); filter: drop-shadow(-2px 0 6px #ef4444); }
+    60% { transform: translate(-1px, -2px) scale(1.02); }
+    80% { transform: translate(2px, 1px) scale(1); }
+    100% { transform: translate(0) scale(1); }
+}
+
+.glitch-text:hover {
+    animation: ghost-glitch 0.3s infinite ease-in-out;
+}
+
+/* Chamas das Velas */
+@keyframes candle-flicker {
+    0%, 100% {
+        transform: scaleY(1) rotate(-1deg);
+        filter: drop-shadow(0 0 8px #f59e0b) drop-shadow(0 0 16px #ef4444);
+    }
+    25% {
+        transform: scaleY(1.15) scaleX(0.95) rotate(2deg);
+        filter: drop-shadow(0 0 12px #f59e0b) drop-shadow(0 0 22px #dc2626);
+    }
+    50% {
+        transform: scaleY(0.9) scaleX(1.05) rotate(-2deg);
+        filter: drop-shadow(0 0 6px #d97706) drop-shadow(0 0 12px #991b1b);
+    }
+    75% {
+        transform: scaleY(1.08) scaleX(0.98) rotate(1deg);
+        filter: drop-shadow(0 0 10px #f59e0b) drop-shadow(0 0 18px #ef4444);
+    }
+}
+
+.candle-flame {
+    animation: candle-flicker 1.8s infinite ease-in-out;
+    transform-origin: bottom center;
+}
+
+/* Lápis de Charlie Charlie */
+.pencil-body {
+    background: linear-gradient(90deg, #b45309 0%, #d97706 40%, #fbbf24 60%, #b45309 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    border-radius: 2px;
+}
+
+.pencil-lead {
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 22px solid #e5e7eb;
+    position: relative;
+}
+
+.pencil-lead::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: -22px;
+    width: 0;
+    height: 0;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-right: 9px solid #111827;
+}
+
+.pencil-eraser {
+    background: #ef4444;
+    border-left: 5px solid #9ca3af;
+    border-radius: 0 3px 3px 0;
+}
+
+/* Sombra flutuante do lápis superior */
+.pencil-shadow {
+    filter: blur(4px);
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+}
+
+/* Rotação e Transição com Hesitação Espectral */
+#lapis-giratorio {
+    transition: transform 3.8s cubic-bezier(0.15, 0.85, 0.25, 1.0);
+    transform-origin: center center;
+}
+
+#roleta-disco {
+    transition: transform 4.2s cubic-bezier(0.12, 0.88, 0.28, 1.0);
+    transform-origin: center center;
+}
+
+/* Fita de Sangue / Borda Ritualística */
+.border-blood {
+    border-color: #8b0000;
+}
+
+.border-blood-glow {
+    border-color: #dc2626;
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+}
+
+/* Efeito de névoa fantasmagórica */
+.fog-layer {
+    background: radial-gradient(ellipse at center, rgba(139, 0, 0, 0.15) 0%, rgba(10, 10, 15, 0.85) 75%);
+    pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+    background: #8b0000;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #dc2626;
+}
