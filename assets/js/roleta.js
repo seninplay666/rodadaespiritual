@@ -11,12 +11,14 @@ class RoletaEspiritual {
         this.modoVisual = 'charlie'; // 'charlie' ou 'disco'
         this.salaId = null;
 
-        // Ângulos base para os 4 quadrantes alternados:
-        // Quadrante 0: Superior-Esquerdo = SIM (315° / -45°)
-        // Quadrante 1: Superior-Direito  = NÃO (45°)
-        // Quadrante 2: Inferior-Direito  = SIM (135°)
-        // Quadrante 3: Inferior-Esquerdo = NÃO (225°)
-        this.angulosQuadrantes = [315, 45, 135, 225];
+        // Ângulos precisos para os 4 quadrantes alternados:
+        // Quadrante 0: Superior-Esquerdo = SIM (45°) -> Ponta do lápis aponta para Top-Left (SIM)
+        // Quadrante 1: Superior-Direito  = NÃO (135°) -> Ponta do lápis aponta para Top-Right (NÃO)
+        // Quadrante 2: Inferior-Direito  = SIM (225°) -> Ponta do lápis aponta para Bottom-Right (SIM)
+        // Quadrante 3: Inferior-Esquerdo = NÃO (315°) -> Ponta do lápis aponta para Bottom-Left (NÃO)
+        this.angulosCharlie = [45, 135, 225, 315];
+        this.angulosDisco = [315, 225, 135, 45];
+        this.angulosQuadrantes = this.angulosCharlie;
 
         this.inicializar();
     }
@@ -136,18 +138,16 @@ class RoletaEspiritual {
 
     executarAnimacaoRotacao(dados) {
         const indice = dados.indice !== undefined ? dados.indice : 0;
-        const anguloAlvo = this.angulosQuadrantes[indice] || 0;
+        const tabelaAngulos = this.modoVisual === 'charlie' ? this.angulosCharlie : this.angulosDisco;
+        const anguloAlvo = tabelaAngulos[indice] !== undefined ? tabelaAngulos[indice] : 0;
 
-        // Variação orgânica pequena (+- 4 graus) para realismo físico
-        const jitter = (Math.random() * 8) - 4;
-        
-        // Dá entre 5 e 8 voltas completas
+        // Dá entre 5 e 8 voltas completas para o suspense
         const voltasCompletas = (Math.floor(Math.random() * 3) + 5) * 360;
         
-        // Calcula a nova rotação contínua (sempre para frente)
+        // Calcula a nova rotação contínua e exata (sempre para frente)
         const offsetAtual = this.rotacaoAtual % 360;
         const diferenca = ((anguloAlvo - offsetAtual) + 360) % 360;
-        this.rotacaoAtual += voltasCompletas + diferenca + jitter;
+        this.rotacaoAtual += voltasCompletas + diferenca;
 
         // Aplica rotação ao elemento ativo
         if (this.modoVisual === 'charlie' && this.lapisGiratorio) {
@@ -166,7 +166,7 @@ class RoletaEspiritual {
             }
 
             // Destaca o quadrante vencedor no tabuleiro
-            this.destacarQuadrante(indice);
+            this.destacarQuadrante(indice, dados.tipo);
 
             // Adiciona ao histórico na tela
             this.adicionarAoHistorico(dados);
@@ -192,16 +192,24 @@ class RoletaEspiritual {
         }, 3900);
     }
 
-    destacarQuadrante(indice) {
+    destacarQuadrante(indice, tipo = 'sim') {
         const quadrantes = document.querySelectorAll('.quadrante-charlie');
-        quadrantes.forEach(q => q.classList.remove('bg-red-950/70', 'ring-2', 'ring-red-500'));
+        quadrantes.forEach(q => {
+            q.classList.remove('bg-red-950/90', 'bg-stone-800/90', 'ring-4', 'ring-red-500', 'ring-stone-300', 'shadow-[0_0_25px_#dc2626]', 'shadow-[0_0_25px_rgba(255,255,255,0.4)]');
+        });
 
         const quadranteAlvo = document.getElementById(`quadrante-${indice}`);
         if (quadranteAlvo) {
-            quadranteAlvo.classList.add('bg-red-950/70', 'ring-2', 'ring-red-500');
+            const isSim = tipo === 'sim';
+            if (isSim) {
+                quadranteAlvo.classList.add('bg-red-950/90', 'ring-4', 'ring-red-500', 'shadow-[0_0_25px_#dc2626]');
+            } else {
+                quadranteAlvo.classList.add('bg-stone-800/90', 'ring-4', 'ring-stone-300', 'shadow-[0_0_25px_rgba(255,255,255,0.4)]');
+            }
+
             setTimeout(() => {
-                quadranteAlvo.classList.remove('bg-red-950/70', 'ring-2', 'ring-red-500');
-            }, 3000);
+                quadranteAlvo.classList.remove('bg-red-950/90', 'bg-stone-800/90', 'ring-4', 'ring-red-500', 'ring-stone-300', 'shadow-[0_0_25px_#dc2626]', 'shadow-[0_0_25px_rgba(255,255,255,0.4)]');
+            }, 3500);
         }
     }
 
